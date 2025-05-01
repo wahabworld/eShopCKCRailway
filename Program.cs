@@ -1,3 +1,5 @@
+using eShopCKC.Services;
+
 namespace eShopCKC
 {
     public class Program
@@ -8,6 +10,8 @@ namespace eShopCKC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddTransient<ICatalogService, CatalogService>();
 
             var app = builder.Build();
 
@@ -27,7 +31,7 @@ namespace eShopCKC
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Catalog}/{action=Index}/{id?}")
                 .WithStaticAssets();
 
             app.Run();
