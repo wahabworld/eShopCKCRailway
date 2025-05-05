@@ -14,9 +14,25 @@ namespace eShopCKC.Services
             _context = context;
         }
 
-        public Task<IEnumerable<SelectListItem>> GetBrands()
+        public async Task<IEnumerable<SelectListItem>> GetBrands()
         {
-            throw new NotImplementedException();
+            var brands = await _context.CatalogBrands.ToListAsync();
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem()
+            {
+                Value = null,
+                Text = "All",
+                Selected = true,
+            });
+            foreach (var brand in brands)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Value = brand.Id.ToString(),
+                    Text = brand.Brand
+                });
+            }
+            return items;
         }
 
         public async Task<Catalog> GetCatalogItems(int pageIndex, int itemsPage, int? brandId, int? typeId)
@@ -63,9 +79,25 @@ namespace eShopCKC.Services
 
         }
 
-        public Task<IEnumerable<SelectListItem>> GetTypes()
+        public async Task<IEnumerable<SelectListItem>> GetTypes()
         {
-            throw new NotImplementedException();
+            var types = await _context.CatalogTypes.ToListAsync();
+            var items = new List<SelectListItem>();
+            items.Add(new SelectListItem()
+            {
+                Value = null,
+                Text = "All",
+                Selected = true,
+            });
+            foreach (var type in types)
+            {
+                items.Add(new SelectListItem()
+                {
+                    Value = type.Id.ToString(),
+                    Text = type.Type
+                });
+            }
+            return items;
         }
     }
 }

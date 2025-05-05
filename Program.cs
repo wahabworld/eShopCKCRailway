@@ -1,4 +1,6 @@
+using eShopCKC.Infrastructure;
 using eShopCKC.Services;
+using Microsoft.EntityFrameworkCore;
 
 namespace eShopCKC
 {
@@ -12,6 +14,22 @@ namespace eShopCKC
             builder.Services.AddControllersWithViews();
 
             builder.Services.AddTransient<ICatalogService, CatalogService>();
+
+            builder.Services.AddDbContext
+                <CatalogContext>(
+                    c =>
+                    {
+                        try
+                        {
+                            c.UseSqlServer("Server=yourservername;Integrated Security=true;Initial Catalog=CatalogDbCKC;Encrypt=False;");
+                        }
+                        catch (Exception)
+                        {
+                            throw;
+                        }
+
+                    }
+                );
 
             var app = builder.Build();
 
@@ -33,6 +51,10 @@ namespace eShopCKC
                 name: "default",
                 pattern: "{controller=Catalog}/{action=Index}/{id?}")
                 .WithStaticAssets();
+
+            CatalogContextSeed.SeedAsync(app,
+                app.Services.GetRequiredService<ILoggerFactory>())
+                .Wait();
 
             app.Run();
         }
