@@ -13,7 +13,7 @@ namespace eShopCKC.ViewModels
 
         public int? BrandFilterApplied { get; set; }
 
-        public int? TypeFilterApplied { get; set; }
+        public int? TypesFilterApplied { get; set; }
 
         public PaginationInfo PaginationInfo { get; set; }
 

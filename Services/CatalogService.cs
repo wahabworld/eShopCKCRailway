@@ -69,7 +69,7 @@ namespace eShopCKC.Services
 
         private List<CatalogItem> ComposePictureUri(List<CatalogItem> items)
         {
-            var baseUri = "";
+            var baseUri = "https://localhost:7164";
             items.ForEach(x =>
                      x.PictureUri = x.PictureUri.Replace("http://catalogbaseurltobereplaced", baseUri)
 
