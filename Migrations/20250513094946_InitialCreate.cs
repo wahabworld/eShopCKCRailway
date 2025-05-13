@@ -1,33 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
 namespace eShopCKC.Migrations
 {
-    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateSequence(
-                name: "Catalog_brand_hilo",
-                incrementBy: 10);
-
-            migrationBuilder.CreateSequence(
-                name: "Catalog_hilo",
-                incrementBy: 10);
-
-            migrationBuilder.CreateSequence(
-                name: "Catalog_type_hilo",
-                incrementBy: 10);
-
             migrationBuilder.CreateTable(
                 name: "CatalogBrand",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Brand = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Brand = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -38,8 +26,9 @@ namespace eShopCKC.Migrations
                 name: "CatalogType",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Type = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Type = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -50,13 +39,14 @@ namespace eShopCKC.Migrations
                 name: "Catalog",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PictureUri = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CatalogTypeId = table.Column<int>(type: "int", nullable: false),
-                    CatalogBrandId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    Name = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "text", nullable: false),
+                    Price = table.Column<decimal>(type: "numeric", nullable: false),
+                    PictureUri = table.Column<string>(type: "text", nullable: true),
+                    CatalogTypeId = table.Column<int>(type: "integer", nullable: false),
+                    CatalogBrandId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -86,7 +76,6 @@ namespace eShopCKC.Migrations
                 column: "CatalogTypeId");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
@@ -97,15 +86,6 @@ namespace eShopCKC.Migrations
 
             migrationBuilder.DropTable(
                 name: "CatalogType");
-
-            migrationBuilder.DropSequence(
-                name: "Catalog_brand_hilo");
-
-            migrationBuilder.DropSequence(
-                name: "Catalog_hilo");
-
-            migrationBuilder.DropSequence(
-                name: "Catalog_type_hilo");
         }
     }
 }
