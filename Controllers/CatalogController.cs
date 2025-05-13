@@ -52,10 +52,25 @@ namespace eShopCKC.Controllers
 
         public IActionResult GetImage(int id)
         {
-            var contentRoot = _env.ContentRootPath + "//Pics";
+            var contentRoot = Path.Combine(_env.ContentRootPath, "Pics");
             var path = Path.Combine(contentRoot, id + ".png");
-            Byte[] b = System.IO.File.ReadAllBytes(path);
-            return File(b, "image/png");
+
+            if (!System.IO.File.Exists(path))
+            {
+                return NotFound($"Image with ID {id} was not found.");
+            }
+
+            try
+            {
+                Byte[] b = System.IO.File.ReadAllBytes(path);
+                return File(b, "image/png");
+            }
+            catch (Exception ex)
+            {
+                // Log the exception if needed
+                return StatusCode(500, $"An error occurred while retrieving the image: {ex.Message}");
+            }
         }
+
     }
 }

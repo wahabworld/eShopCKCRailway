@@ -46,11 +46,11 @@ namespace eShopCKC
 
             app.UseAuthorization();
 
-            app.MapStaticAssets();
+            app.UseStaticFiles();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Catalog}/{action=Index}/{id?}")
-                .WithStaticAssets();
+                pattern: "{controller=Catalog}/{action=Index}/{id?}");
+                //.WithStaticAssets();
 
             CatalogContextSeed.SeedAsync(app,
                 app.Services.GetRequiredService<ILoggerFactory>())
