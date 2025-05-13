@@ -21,7 +21,7 @@ namespace eShopCKC
                     {
                         try
                         {
-                            c.UseNpgsql("Host=localhost;Port=5432;Database=CatalogDbCKC;Username=postgres;Password=123456;");
+                            c.UseNpgsql("Host=trolley.proxy.rlwy.net;Port=45608;Database=CatalogDbCKC;Username=postgres;Password=pqZEpxhqepKUSsFzzHWchyDaqgtgxNvh;");
                         }
                         catch (Exception)
                         {
