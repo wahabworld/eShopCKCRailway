@@ -7,13 +7,13 @@
             @ViewData["Title"] - eShopCKC 
         </title>
 
-        <environment names="Development">
+    <environment names="Staging, Production">
             <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
             <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
             <link rel="stylesheet" href="~/css/catalog/catalog.component.css" asp-append-version="true" />
             <link rel="stylesheet" href="~/css/catalog/pager.css" asp-append-version="true" />
         </environment>
-        <environment names="Staging, Production">
+    <environment names="Development">
             <link rel="stylesheet" href="https://cdn.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.5/css/bootstrap.min.css"
               asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
               asp-fallback-test-class="sr-only"
@@ -52,12 +52,12 @@
             </div>
         </footer>
 
-        <environment names="Development">
+    <environment names="Staging, Production">
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/js/site.js" asp-append-version="true"></script>
         </environment>
-        <environment names="Staging, Production">
+    <environment names="Development">
             <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min..js"
             asp-fallback-src="~/lib/jquery/dist/jquery.js"
             asp-fallback-test="window.jQuery"
