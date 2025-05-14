@@ -9,6 +9,10 @@ RUN dotnet restore
 
 # Copy the rest of the files and publish
 COPY . ./
+
+# Copy Pics to a known location in publish folder
+RUN mkdir -p /app/publish/Pics && cp -r Pics/* /app/publish/Pics/
+
 RUN dotnet publish -c Release -o /app/publish
 
 # ---------- Runtime Stage ----------
