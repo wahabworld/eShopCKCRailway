@@ -57,7 +57,7 @@ namespace eShopCKC.Controllers
 
             if (!System.IO.File.Exists(path))
             {
-                return NotFound($"Image with ID {id} was not found.");
+                return NotFound($"Image with ID {id} was not found at path {path}");
             }
 
             try
